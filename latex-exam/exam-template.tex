@@ -1,0 +1,144 @@
+\documentclass[12pt, oneside]{article}
+\usepackage{graphicx}
+\usepackage[nohead, margin=1.0in]{geometry}
+
+
+% set up whether we are printing assignment or solution
+\newif\ifsolution
+\solutiontrue
+\solutionfalse
+
+% page formatting
+\pagestyle{empty}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{10pt}
+
+% macros for formatting
+\def\true{true}
+\def\false{false}
+
+% creates true false command with indented question
+\newcommand{\tf}[1]
+{
+\vfill
+\parbox[t]{0.25\textwidth}{\bf TRUE \hspace{0.1 in} FALSE }
+\parbox[t]{0.75\textwidth}{#1 (2pt)}
+}
+
+% creates grading table row macro
+\newcommand{\tablerow}[2]
+{\rule[-0.3cm]{0cm}{1cm}#1 & #2 & \\ \hline}
+
+% creates heading for problems
+\newcommand{\problem}[1]{{\bf Problem #1}}
+
+% creates centered heading for sections
+\newcommand{\chead}[1]
+{\begin{center}\large\textbf{#1}\end{center}
+\hrule
+\vspace{10pt}}
+
+% solution
+\newcommand{\solution}[1]
+{\ifsolution
+Answer: {\it #1}
+\else\fi}
+
+% end macros
+
+
+
+\begin{document}
+
+% header block
+\begin{center}
+{\bf Midterm Exam}\\
+{\bf ENSP 330}\\
+{\bf Energy, Technology, and Society}\\
+{\bf Daniel Soto}\\
+{\bf Tuesday 29 Oct 2013}\\
+\end{center}
+
+
+% name and signature boxes
+\makebox[1.0in][l]
+{Name:}
+\framebox[4.5in]{\rule{0cm}{1.5cm}}\\
+\vspace{0.2cm}
+
+\makebox[1.0in][l]
+{Signature:}
+\framebox[4.5in]{\rule{0cm}{1.5cm}}\\
+\vspace{0.8cm}
+
+
+% instructions to students
+\noindent
+{\bf Instructions.}
+\begin{itemize}
+\item Clearly show your work.  Box answers to make them clear.
+\item You are allowed until 11:50 to work on this midterm.
+\item In order to recieve full credit, you must show your work and
+justify your answers.  The correct answer without any work will recieve
+little or no credit.
+\end{itemize}
+
+\vfill
+
+% grading and scores table
+\begin{center}
+\begin{tabular}{|c|c|c|}
+\hline
+\rule[-0.3cm]{0cm}{1cm}
+Question & Points & Score \\
+\hline
+\tablerow{Human Power}{16}
+\tablerow{Short Answer}{30}
+\tablerow{True/False}{24}
+\tablerow{\bf{Total}}{70}
+\end{tabular}
+\end{center}
+
+\vfill
+
+
+%
+% midterm content
+%
+
+\newpage
+\chead{Human Power}
+
+Question text
+
+\solution{Power}
+
+
+
+
+\newpage
+\chead{Short Answer}
+
+Describe the important differences and similarities between how a coal
+plant and a nuclear plant generate electricity. (6 pts)
+
+\solution{Differences: The main difference is in the source of heat.  A
+coal plant uses combustion of coal while a nuclear plant uses a chain
+reaction of nuclear fission to create heat.
+
+Similarities: The main
+similarity is in the use of steam turbines to generate electricity
+through a steam heat engine.}
+
+\vfill
+
+\newpage
+\chead{True or False?}
+
+\tf{A 100 MW solar photovoltaic electricity plant will likely produce
+more power in a year than a 100 MW coal electricity plant.}
+\solution{False}
+
+
+\end{document}
+
