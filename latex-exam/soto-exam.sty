@@ -2,51 +2,79 @@
 \usepackage{color}
 \usepackage[nohead, margin=1.0in]{geometry}
 
+%
 % page formatting
+%
 \pagestyle{empty}
 \setlength{\parindent}{0pt}
 \setlength{\parskip}{10pt}
 
+%
 % set up whether we are printing assignment or solution
+%
 \newif\ifsolution
 
+%
 % creates true false command with indented question
+%
 \newcounter{truefalse}
 \newcommand{\tf}[1]
 {
 \stepcounter{truefalse}
-\parbox[t]{0.25\textwidth}
-{\bf \arabic{truefalse}.\hfill TRUE \hfill FALSE \hspace{0.1 in}}
-\parbox[t]{0.75\textwidth}{#1 (2pt)}
+\parbox[t]{0.15\textwidth}
+{\arabic{truefalse}.{\bf \ \ T \ \ F }}
+\parbox[t]{0.85\textwidth}{#1 (2pt)}
+\vfill
 }
 
+%
 % creates grading table row macro
+%
 \newcommand{\tablerow}[2]
 {\rule[-0.3cm]{0cm}{1cm}#1 & #2 & \\ \hline}
 
-% creates heading for problems
-%\newcommand{\problem}[1]{{\bf Problem #1}}
+%
+% creates numbered heading for problems
+%
 \newcounter{problem}
 \newcommand{\problem}[1]
 {
 \stepcounter{problem}
-\chead{\arabic{problem}. #1}
+\probhead{\arabic{problem}. #1}
 }
 
-% creates centered heading for sections
-\newcommand{\chead}[1]
-%{\begin{center}\large\textbf{#1}\end{center}
+%
+% creates boldface heading and rule
+%
+\newcommand{\probhead}[1]
 {{\large\textbf{#1}}
 \vspace{5pt}
 \hrule
 \vspace{10pt}}
 
-\definecolor{solution-color}{rgb}{0.0, 0.5, 0.0}
+%
+% name and signature boxes
+%
+\newcommand{\makenameblock}
+{
+\makebox[1.0in][l]
+{Name:}
+\framebox[4.5in]{\rule{0cm}{1.5cm}}\\
+\vspace{0.2cm}
 
+\makebox[1.0in][l]
+{Signature:}
+\framebox[4.5in]{\rule{0cm}{1.5cm}}\\
+\vspace{0.8cm}
+}
+
+%
 % solution
+%
+\definecolor{solution-color}{rgb}{0.0, 0.5, 0.0}
 \newcommand{\solution}[1]
 {\ifsolution
-{\color{solution-color} #1}
+%{\color{solution-color} #1}
+{\it #1}
 \else\fi}
 
-% end macros
