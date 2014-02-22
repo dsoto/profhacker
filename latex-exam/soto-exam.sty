@@ -14,6 +14,19 @@
 %
 \newif\ifsolution
 
+% name and signature boxes
+\newcommand\namebox{
+\makebox[1.0in][l]
+{Name:}
+\framebox[4.5in]{\rule{0cm}{1.5cm}}\\
+}
+
+%
+% creates centered heading for sections
+%
+\newcommand{\chead}[1]
+{\begin{center}\large\textbf{#1}\end{center}}
+
 %
 % creates true false command with indented question
 %
