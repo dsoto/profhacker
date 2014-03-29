@@ -1,3 +1,7 @@
+% custom beamer template to get document sizing correct
+% currently if a graphic has a portrait orientation, the pandoc width
+% sizing will cause the bottom to be cut off
+
 \documentclass[$if(fontsize)$$fontsize$,$endif$$if(handout)$handout,$endif$$if(beamer)$ignorenonframetext,$endif$$for(classoption)$$classoption$$sep$,$endfor$]{$documentclass$}
 $if(theme)$
 \usetheme{$theme$}
@@ -68,9 +72,12 @@ $if(graphics)$
     \Gin@nat@width
   \fi
 }
-% \makeatother
-% \let\Oldincludegraphics\includegraphics
-% \renewcommand{\includegraphics}[2][]{\Oldincludegraphics[width=\ScaleIfNeeded]{#2}}
+
+% drs - fixing height of graphics
+
+\makeatother
+\let\Oldincludegraphics\includegraphics
+\renewcommand{\includegraphics}[2][]{\Oldincludegraphics[height=2in]{#2}}
 $endif$
 
 % Comment these out if you don't want a slide with just the

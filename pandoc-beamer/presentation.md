@@ -4,5 +4,5 @@
 
 ## slide two
 - oversized vertical
-<!-- - ![](600x800.jpeg) -->
-- \includegraphics[width=2in]{600x800.jpeg}
+- ![](600x800.jpeg)
+<!-- - \includegraphics[width=3in]{600x800.jpeg} -->
