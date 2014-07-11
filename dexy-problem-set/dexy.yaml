@@ -1,5 +1,15 @@
+# output pdf original assignment
 homework-04.tex|jinja|latex:
     - 330-HW-questions.tex|idio|t
 
+# output pdf answer key
+homework-04-key.tex|jinja|latex:
+    - 330-HW-questions.tex|idio|t
+
+# output to html
 homework-04.tex|jinja|htlatex:
+    - 330-HW-questions.tex|idio|t
+
+# create a render of all possible questions
+all-problems-template.tex|jinja|latex:
     - 330-HW-questions.tex|idio|t

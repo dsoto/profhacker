@@ -9,7 +9,8 @@
 
 % solution
 \newcommand{\solution}[1]
-{\vspace{10pt}
+{\section*{}
+\vspace{10pt}
 {\color{answer-color} #1}
 }
 
@@ -33,14 +34,17 @@ correctness of the result.
 
 Due Date: Thursday, November 21st
 
-% grab all tagged content from the master question and answer doc
 <% set QAs = d['330-HW-questions.tex|idio|t'] %>
 
-% this list selects questions from the master list...
+% iterate over assigned numbers and pull in sections with labels q[i]
+% and a[i]
+
 <% for i in [1, 3, 5] %>
 
 \section{}
 << QAs['q%s' % i] >>
+
+\solution{<< QAs['a%s' % i] >>}
 
 <% endfor %>
 

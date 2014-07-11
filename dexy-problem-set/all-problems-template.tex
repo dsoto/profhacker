@@ -1,0 +1,31 @@
+\documentclass{article}
+\usepackage{color}
+\usepackage[nohead, margin=1.5in]{geometry}
+\definecolor{answer-color}{rgb}{0.0, 0.5, 0.0}
+
+% creates centered heading for sections
+\newcommand{\chead}[1]
+{\begin{center}\large\textbf{#1}\end{center}}
+
+% solution
+\newcommand{\solution}[1]
+{\vspace{10pt}
+{\color{answer-color} #1}}
+
+\newcommand{\ufrac}[2]{\frac{\textrm{#1}}{\textrm{#2}}}
+
+\begin{document}
+
+\chead{ENSP 330 Homework Library}
+\hrule
+\vspace{10pt}
+
+<% set QAs = d['330-HW-questions.tex|idio|t'] %>
+
+% iterate over all questions and output with %%%label as a heading
+<% for qn in enumerate(QAs.keys()[1:]) %>
+\section*{<< qn[1] >>}
+<< QAs[qn[1]] >>
+<% endfor %>
+
+\end{document}
