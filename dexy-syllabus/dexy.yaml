@@ -1,0 +1,4 @@
+438-syllabus-template.md|jinja:
+    - table_parser.py|py:
+        - py: {add-new-files: True}
+        - .xlsx

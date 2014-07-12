@@ -5,8 +5,6 @@ import jinja2
 
 class_number = '438'
 schedule_file = '{}-syllabus.xlsx'.format(class_number)
-template_file = '{}-syllabus.jinja'.format(class_number)
-markdown_file = '{}-syllabus.md'.format(class_number)
 
 def create_full_table(schedule, columns):
 
@@ -28,6 +26,8 @@ def create_partial_table(schedule, columns):
     tablestr = tabulate.tabulate(rdf[columns].values, headers=columns, tablefmt='pipe')
     #print(tablestr)
     return tablestr
+
+# TODO this could be less boilerplate
 
 schedule = pd.read_excel(schedule_file, 'schedule', index='Lecture')
 course_schedule = create_full_table(schedule, ['Lecture', 'Date', 'Topic'])
