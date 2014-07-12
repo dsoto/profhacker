@@ -57,5 +57,7 @@ def print_dates(start_date=None,
                                      week=d.isocalendar()[1]-start_date.isocalendar()[1]+1))
 
 
+# TODO create command line interface dates.py -n numdays -f format
+
 if __name__=='__main__':
     print_dates(dt.date.today())
