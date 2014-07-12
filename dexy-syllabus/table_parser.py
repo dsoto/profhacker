@@ -37,3 +37,12 @@ homework_schedule = create_partial_table(schedule, ['Date', 'Homework'])
 
 with open('course-schedule.md', 'w') as f:
     f.write(course_schedule)
+
+with open('project-schedule.md', 'w') as f:
+    f.write(project_schedule)
+
+with open('reading-schedule.md', 'w') as f:
+    f.write(reading_schedule)
+
+with open('homework-schedule.md', 'w') as f:
+    f.write(homework_schedule)
