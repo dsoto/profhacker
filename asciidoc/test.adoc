@@ -1,0 +1,14 @@
+= heading 1
+:stem:
+
+== heading 2
+
+== heading 2, 2
+
+//comment that should not show up
+
+asciimath:[x^2 + y^2]
+
+if enclosed in '\(' math '\)', the mathjax will render correctly in the
+browser
+
