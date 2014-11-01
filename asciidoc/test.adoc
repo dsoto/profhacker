@@ -25,6 +25,7 @@ browser
 
 .An example table
 [options="header"]
+[frame="topbot"]
 |=======================
 |Col 1|Col 2      |Col 3
 |1    |Item 1     |a
