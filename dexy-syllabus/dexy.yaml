@@ -1,4 +1,31 @@
-438-syllabus-template.md|jinja:
+# TODO make html target with my CSS
+# TODO create PDF using casper.js
+
+# create plaintext table files for use in templates
+tables:
     - table_parser.py|py:
         - py: {add-new-files: True}
         - .xlsx
+
+# output markdown file
+438-syllabus-template.md|jinja:
+    - output-name: "438-syllabus.md"
+    - tables
+
+# output DOCX file using pandoc
+438-syllabus-template.md|jinja|pandoc:
+    - output-name: "438-syllabus.docx"
+    - pandoc: {ext: .docx}
+    - tables
+
+# output PDF using markdownpdf filter
+438-syllabus-template.md|jinja|markdownpdf:
+    - output-name: "438-syllabus.pdf"
+    - pandoc: {ext: .docx}
+    - tables
+
+# output html file using github markdown for tables
+438-syllabus-template.md|jinja|ghmd:
+    - output-name: "438-syllabus.html"
+    - tables
+

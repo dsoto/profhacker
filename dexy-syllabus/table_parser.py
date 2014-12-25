@@ -3,6 +3,7 @@ import numpy as np
 import tabulate
 import jinja2
 
+# TODO: can this be fed in by dexy?
 class_number = '438'
 schedule_file = '{}-syllabus.xlsx'.format(class_number)
 
@@ -28,7 +29,6 @@ def create_partial_table(schedule, columns):
     return tablestr
 
 # TODO this could be less boilerplate
-
 schedule = pd.read_excel(schedule_file, 'schedule', index='Lecture')
 course_schedule = create_full_table(schedule, ['Lecture', 'Date', 'Topic'])
 project_schedule = create_partial_table(schedule, ['Date', 'Project'])
