@@ -57,6 +57,24 @@ def print_dates(start_date=None,
                                      week=d.isocalendar()[1]-start_date.isocalendar()[1]+1))
 
 
+def write_dates(start_date=None,
+                end_date=None,
+                weekdays=range(7),
+                holidays=(),
+                template_string='{date:%a %d %b %Y}',
+                output_file=None):
+    # is there a better way to do this?
+    if start_date == None:
+        start_date = dt.date.today()
+    if end_date == None:
+        end_date = start_date + dt.timedelta(days=7)
+    for i, d in enumerate(emit_class_dates(start_date, weekdays,
+                                           holidays), start=1):
+        if d > end_date:
+            break
+        output_file.write(template_string.format(i=i, date=d,
+                                     week=d.isocalendar()[1]-start_date.isocalendar()[1]+1))
+
 # TODO create command line interface dates.py -n numdays -f format
 
 if __name__=='__main__':
