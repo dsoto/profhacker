@@ -8,9 +8,9 @@ tables:
         - .xlsx
 
 # output markdown file
-438-syllabus-template.md|jinja:
-    - output-name: "438-syllabus.md"
-    - tables
+# 438-syllabus-template.md|jinja:
+#     - output-name: "438-syllabus.md"
+#     - tables
 
 # output DOCX file using pandoc
 438-syllabus-template.md|jinja|pandoc:
@@ -21,11 +21,11 @@ tables:
 # output PDF using markdownpdf filter
 438-syllabus-template.md|jinja|markdownpdf:
     - output-name: "438-syllabus.pdf"
-    - pandoc: {ext: .docx}
     - tables
 
 # output html file using github markdown for tables
-438-syllabus-template.md|jinja|ghmd:
-    - output-name: "438-syllabus.html"
+# TODO: get CSS from soto.css into the header
+438-syllabus-template.md|jinja|ghmd|easyhtml:
     - tables
+    - output-name: "438-syllabus.html"
 
