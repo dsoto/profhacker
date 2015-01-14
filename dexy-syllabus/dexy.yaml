@@ -1,5 +1,6 @@
 # TODO make html target with my CSS
 # TODO create PDF using casper.js
+# TODO pass in class prefix to table_parser.py
 
 # create plaintext table files for use in templates
 tables:
@@ -13,19 +14,19 @@ tables:
 #     - tables
 
 # output DOCX file using pandoc
-438-syllabus-template.md|jinja|pandoc:
-    - output-name: "438-syllabus.docx"
+000-syllabus-template.md|jinja|pandoc:
+    - output-name: "000-syllabus.docx"
     - pandoc: {ext: .docx}
     - tables
 
 # output PDF using markdownpdf filter
-438-syllabus-template.md|jinja|markdownpdf:
-    - output-name: "438-syllabus.pdf"
+000-syllabus-template.md|jinja|markdownpdf:
+    - output-name: "000-syllabus.pdf"
     - tables
 
 # output html file using github markdown for tables
 # TODO: get CSS from soto.css into the header
-438-syllabus-template.md|jinja|ghmd|easyhtml:
+000-syllabus-template.md|jinja|ghmd|easyhtml:
     - tables
-    - output-name: "438-syllabus.html"
+    - output-name: "000-syllabus.html"
 

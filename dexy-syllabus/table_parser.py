@@ -1,10 +1,9 @@
 import pandas as pd
 import numpy as np
 import tabulate
-import jinja2
 
 # TODO: can this be fed in by dexy?
-class_number = '438'
+class_number = '000'
 schedule_file = '{}-syllabus.xlsx'.format(class_number)
 
 def create_full_table(schedule, columns):
