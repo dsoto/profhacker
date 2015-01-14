@@ -1,6 +1,7 @@
 # TODO make html target with my CSS
 # TODO create PDF using casper.js
 # TODO pass in class prefix to table_parser.py
+# TODO can I create an intermediate markdown file instead of creating it multiple times?
 
 # create plaintext table files for use in templates
 tables:
@@ -9,24 +10,26 @@ tables:
         - .xlsx
 
 # output markdown file
-# 438-syllabus-template.md|jinja:
+# 438-syllabus.md|jinja:
 #     - output-name: "438-syllabus.md"
 #     - tables
 
+
 # output DOCX file using pandoc
-000-syllabus-template.md|jinja|pandoc:
+# processed-syllabus|pandoc:
+000-syllabus.md|jinja|pandoc:
     - output-name: "000-syllabus.docx"
     - pandoc: {ext: .docx}
     - tables
 
 # output PDF using markdownpdf filter
-000-syllabus-template.md|jinja|markdownpdf:
+000-syllabus.md|jinja|markdownpdf:
     - output-name: "000-syllabus.pdf"
     - tables
 
 # output html file using github markdown for tables
 # TODO: get CSS from soto.css into the header
-000-syllabus-template.md|jinja|ghmd|easyhtml:
+000-syllabus.md|jinja|ghmd|easyhtml:
     - tables
     - output-name: "000-syllabus.html"
 
