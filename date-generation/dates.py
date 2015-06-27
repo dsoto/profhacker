@@ -1,6 +1,7 @@
 from dateutil import *
 from dateutil.rrule import *
 import datetime as dt
+import click
 
 # this is a generator that outputs days in the range that are not
 # holidays
@@ -39,17 +40,19 @@ def emit_class_dates(refdate, class_days, holidays):
 # holidays optional
 # weekdays optional
 
-def print_dates(start_date=None,
+@click.command()
+@click.option('--days', default=7)
+def print_dates(start_date=dt.date.today(),
                 end_date=None,
-                weekdays=range(7),
+                days=None,
                 holidays=(),
                 template_string='{date:%a %d %b %Y}'):
     # is there a better way to do this?
     if start_date == None:
         start_date = dt.date.today()
     if end_date == None:
-        end_date = start_date + dt.timedelta(days=7)
-    for i, d in enumerate(emit_class_dates(start_date, weekdays,
+        end_date = start_date + dt.timedelta(days=days)
+    for i, d in enumerate(emit_class_dates(start_date, range(days),
                                            holidays), start=1):
         if d > end_date:
             break
@@ -78,4 +81,4 @@ def write_dates(start_date=None,
 # TODO create command line interface dates.py -n numdays -f format
 
 if __name__=='__main__':
-    print_dates(dt.date.today())
+    print_dates()
