@@ -1,28 +1,26 @@
+import nbformat
 from sys import argv
 
-file_input = 'test.ipynb'
+# TODO: if name main stuff for usage and stderr
+
 file_input = argv[1]
-file_output = 'test_out.ipynb'
-file_output = argv[2]
 
-import json
+with open(file_input, 'r', encoding='utf-8') as f:
+    nb = nbformat.read(f, as_version=4)
 
-with open(file_input) as f:
-    doc = json.loads(f.read())
 
-def is_not_solution(c):
-    # for now if solution tag exists assume True
-    if 'solution' not in c['metadata']:
-        return True
+# slides of type slide are white listed
+def is_assigned(c):
+    if hasattr(c.metadata, 'slideshow'):
+        if c.metadata.slideshow.slide_type == 'slide':
+            return True
+        else:
+            return False
     else:
         return False
 
 
-new_cells = list(filter(is_not_solution, doc['cells']))
-doc['cells'] = new_cells
-
-# delete cells from dictionary with certain metadata
-# if 'solution': True exists in metadata, remove from list
-with open(file_output, 'w') as f:
-    f.write(json.dumps(doc))
+new_cells = list(filter(is_assigned, nb['cells']))
+nb['cells'] = new_cells
+print(nbformat.writes(nb))
 
