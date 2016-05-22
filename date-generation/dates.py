@@ -1,84 +1,66 @@
-from dateutil import *
-from dateutil.rrule import *
 import datetime as dt
-import click
 
-# this is a generator that outputs days in the range that are not
-# holidays
-def get_class_dates(first_day, last_day, class_days, holidays):
-    dates = list(rrule(DAILY,
-                       byweekday=class_days,
-                       dtstart=first_day,
-                       until=last_day))
-    for d in dates:
-        if d not in holidays:
-            yield d
+'''
+for class stuff generation, pass start and end dates, class meeting
+days, and holidays and a template to get stuff back.
 
-# templates dates from get_class_dates function
-def output_text(first_day,
-                last_day,
-                class_days,
-                holidays,
-                template_string):
-    for i, d in enumerate(get_class_dates(first_day,
-                                          last_day,
-                                          class_days,
-                                          holidays), start=1):
-        print(template_string.format(num=i, date=d))
+    def generate_stuff(day_start,     # first day of instruction
+                       day_end,       # last day of instruction
+                       meeting_days,  # class days by isoweekday()
+                       holidays,      # holidays as a list of datetimes
+                       template)      # string with placeholder for dates
 
-# continuously emit dates that are in class days but are not holidays
-def emit_class_dates(refdate, class_days, holidays):
+for day to day planning, it would be good to have a command line
+application that could give a formatted date range starting today
+
+    > emit_dates -n 30
+
+
+I could also use enumerate to get the lecture number and this to get the
+week number of the semester.
+
+    week=d.isocalendar()[1]-start_date.isocalendar()[1]+1))
+'''
+
+# emit dates continuously starting with start_date
+def emit_dates(start_date):
+    this_date = start_date
     while True:
-        if refdate not in holidays and refdate.isoweekday() in class_days:
-            yield refdate
-        refdate += dt.timedelta(days=1)
+        yield this_date
+        this_date += dt.timedelta(days=1)
 
-# API
-# send in a start date, end date, weekdays, holidays, and format string
-# get back a text list of rendered dates
-# text string optional and get isoformat dates?
-# holidays optional
-# weekdays optional
+# filter dates by holiday and class day
+def emit_class_dates(start_date, class_days, holidays):
+    for this_date in emit_dates(start_date):
+        if this_date in holidays:
+            continue
+        if this_date.isoweekday() in class_days:
+            yield this_date
 
-@click.command()
-@click.option('--days', default=7)
-def print_dates(start_date=dt.date.today(),
+# generate a list of strings from the class dates
+def emit_strings(start_date=dt.date.today(),
+                 end_date=None,
+                 days=None,
+                 holidays=(),
+                 template_string='{date:%a %d %b %Y}'):
+    for this_date in emit_class_dates(start_date, days, holidays):
+        if this_date > end_date:
+            break
+        yield template_string.format(date=this_date)
+
+# write to file or print to stdout the strings from dates
+def write_dates(start_date=dt.date.today(),
                 end_date=None,
                 days=None,
                 holidays=(),
-                template_string='{date:%a %d %b %Y}'):
-    # is there a better way to do this?
-    if start_date == None:
-        start_date = dt.date.today()
-    if end_date == None:
-        end_date = start_date + dt.timedelta(days=days)
-    for i, d in enumerate(emit_class_dates(start_date, range(days),
-                                           holidays), start=1):
-        if d > end_date:
-            break
-        print(template_string.format(i=i, date=d,
-                                     week=d.isocalendar()[1]-start_date.isocalendar()[1]+1))
-
-
-def write_dates(start_date=None,
-                end_date=None,
-                weekdays=range(7),
-                holidays=(),
                 template_string='{date:%a %d %b %Y}',
-                output_file=None):
-    # is there a better way to do this?
-    if start_date == None:
-        start_date = dt.date.today()
-    if end_date == None:
-        end_date = start_date + dt.timedelta(days=7)
-    for i, d in enumerate(emit_class_dates(start_date, weekdays,
-                                           holidays), start=1):
-        if d > end_date:
-            break
-        output_file.write(template_string.format(i=i, date=d,
-                                     week=d.isocalendar()[1]-start_date.isocalendar()[1]+1))
+                file_out=None):
+    if file_out == None:
+        for string in emit_strings(start_date, end_date, days, holidays, template_string):
+                print(string)
+    else:
+        with open(file_out, 'w') as f:
+            for string in emit_strings(start_date, end_date, days, holidays, template_string):
+                f.write(string)
+                f.write('\n')
 
-# TODO create command line interface dates.py -n numdays -f format
-
-if __name__=='__main__':
-    print_dates()
