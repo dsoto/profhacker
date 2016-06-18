@@ -1,8 +1,10 @@
-# TODO: put on button
-# TODO: figure out the devserver thing
-# TODO: learn HTML form elements
-# TODO: create a second text input field and submit both and read both
-# TODO: route back to the same form, password validation is a good example
+# TODONE: put on button
+# TODONE: figure out the devserver thing
+# TODONE: learn HTML form elements
+# TODONE: route back to the same form, password validation is a good example
+# TODONE: create a radio button quiz question and echo answer
+# TODO: define quiz data model
+# TODO: iterate over quiz data model in template with {{ for }} stuff
 
 from flask import Flask, request, render_template
 app = Flask(__name__)
@@ -16,10 +18,6 @@ def hello():
     if request.method == 'POST':
         return "You posted something " + request.form.get('field1')
 
-# @app.route("/kyle")
-# def kyle():
-#     return "Hello Kyle Young devserver!"
-
 @app.route("/input", methods=['GET', 'POST'])
 def input():
 
@@ -31,9 +29,6 @@ def input():
         return render_template('form.html',
                             template_variable=request.form.get('field1'),
                             question_1=request.form.get('q1'))
-
-
-# '<form action="/" method="POST"><input name="field1"><input type="submit" value="Echo"></form>'
 
 if __name__ == "__main__":
     app.run()
