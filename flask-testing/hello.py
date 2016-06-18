@@ -20,10 +20,16 @@ def hello():
 # def kyle():
 #     return "Hello Kyle Young devserver!"
 
-@app.route("/input")
+@app.route("/input", methods=['GET', 'POST'])
 def input():
-    return render_template('form.html',
+
+    if request.method == 'GET':
+        return render_template('form.html',
                             template_variable='template_variable')
+
+    if request.method == 'POST':
+        return render_template('form.html',
+                            template_variable=request.form.get('field1'))
 
 
 # '<form action="/" method="POST"><input name="field1"><input type="submit" value="Echo"></form>'
