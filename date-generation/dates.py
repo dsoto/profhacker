@@ -12,6 +12,7 @@ days, and holidays and a template to get stuff back.
 
 for day to day planning, it would be good to have a command line
 application that could give a formatted date range starting today
+however, if you don't need to skip dates, spreadsheets do this easily
 
     > emit_dates -n 30
 
