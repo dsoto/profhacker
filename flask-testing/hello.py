@@ -23,12 +23,12 @@ def input():
 
     if request.method == 'GET':
         return render_template('form.html',
-                            template_variable='template_variable')
+                            text_response ='text_response')
 
     if request.method == 'POST':
         return render_template('form.html',
-                            template_variable=request.form.get('field1'),
-                            question_1=request.form.get('q1'))
+                            text_response=request.form.get('field1'),
+                            radio_response=request.form.get('q1'))
 
 if __name__ == "__main__":
     app.run()
