@@ -5,8 +5,11 @@
 <input type="radio" name="q1" value="answer 3">answer 3<br>
 <input type="submit" value="Echo"><br>
 {{text_response}}<br>
-{{radio_response}}
+{{radio_response_1}}
+{{radio_response_2}}
 
+<fieldset>
+    <legend>quiz_questions</legend>
 {% for question in questions %}
 
 {{question.id}}<br>
@@ -20,5 +23,8 @@
 
 {% endfor %}
 
+</fieldset>
+
+{{raw_post}}
 </form>
 

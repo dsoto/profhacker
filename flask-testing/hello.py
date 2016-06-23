@@ -42,7 +42,9 @@ def input():
     if request.method == 'POST':
         return render_template('form.html',
                             text_response=request.form.get('field1'),
-                            radio_response=request.form.get('q1'))
+                            radio_response_1=request.form.get('simple_addition_1'),
+                            radio_response_2=request.form.get('simple_addition_2'),
+                            raw_post=request.form)
 
 if __name__ == "__main__":
     app.run()
