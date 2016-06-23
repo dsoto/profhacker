@@ -12,6 +12,12 @@
 {{question.id}}<br>
 {{question.prompt}}<br>
 
+{% for option in question.options %}
+
+<input type="radio" name="{{question.id}}" value="{{option.text}}">{{option.text}}<br>
+
+{% endfor %}
+
 {% endfor %}
 
 </form>

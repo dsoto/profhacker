@@ -9,8 +9,18 @@
 from flask import Flask, request, render_template
 app = Flask(__name__)
 
-questions = [{'id': 'simple_addition_1', 'prompt': 'What is \\(2^2\\)?'},
-             {'id': 'simple_addition_2', 'prompt': 'What is 2 + 3?'}]
+questions = [{'id': 'simple_addition_1',
+  'options': [{'correct': False, 'feedback': 'too low', 'text': 3},
+   {'correct': True, 'feedback': 'correct', 'text': 4},
+   {'correct': False, 'feedback': 'too high', 'text': 5},
+   {'correct': False, 'feedback': 'too high', 'text': 6}],
+  'prompt': 'What is \\(2^2\\)?'},
+ {'id': 'simple_addition_2',
+  'options': [{'correct': False, 'feedback': 'too low', 'text': 4},
+   {'correct': True, 'feedback': 'correct', 'text': 5},
+   {'correct': False, 'feedback': 'too high', 'text': 6},
+   {'correct': False, 'feedback': 'too high', 'text': 7}],
+  'prompt': 'What is 2 + 3?'}]
 
 @app.route("/", methods=['GET', 'POST'])
 def hello():
