@@ -6,5 +6,13 @@
 <input type="submit" value="Echo"><br>
 {{text_response}}<br>
 {{radio_response}}
+
+{% for question in questions %}
+
+{{question.id}}<br>
+{{question.prompt}}<br>
+
+{% endfor %}
+
 </form>
 

@@ -9,6 +9,9 @@
 from flask import Flask, request, render_template
 app = Flask(__name__)
 
+questions = [{'id': 'simple_addition_1', 'prompt': 'What is \\(2^2\\)?'},
+             {'id': 'simple_addition_2', 'prompt': 'What is 2 + 3?'}]
+
 @app.route("/", methods=['GET', 'POST'])
 def hello():
 
@@ -23,7 +26,8 @@ def input():
 
     if request.method == 'GET':
         return render_template('form.html',
-                            text_response ='text_response')
+                            text_response ='text_response',
+                            questions = questions)
 
     if request.method == 'POST':
         return render_template('form.html',
