@@ -14,10 +14,17 @@ from __future__ import print_function
 
 import flask
 
+from bokeh.charts import Histogram, show
 from bokeh.embed import components
 from bokeh.plotting import figure
 from bokeh.resources import INLINE
 from bokeh.util.string import encode_utf8
+
+import json
+import gspread
+from oauth2client.service_account import ServiceAccountCredentials
+
+import pandas as pd
 
 app = flask.Flask(__name__)
 
@@ -40,19 +47,27 @@ def polynomial():
 
     """
 
+
+
+    # connect to google spreadsheet and get sheet
+    scope = ['https://spreadsheets.google.com/feeds']
+    credentials = ServiceAccountCredentials.from_json_keyfile_name('oauth-keyfile.json', scopes=scope)
+    gc = gspread.authorize(credentials)
+    responses = gc.open("Homework Histogram (Responses)")
+    responses = responses.worksheet("Form Responses 1")
+
+    # create plot html elements
+    data = pd.DataFrame(responses.get_all_records())
+    hist = Histogram(data, values='Question 1')
+    script, div = components(hist, INLINE)
+
+
+
     # Grab the inputs arguments from the URL
     # This is automated by the button
-    args = flask.request.args
+    # args = flask.request.args
 
-    # Get all the form arguments in the url with defaults
-    color = colors[getitem(args, 'color', 'Black')]
-    _from = int(getitem(args, '_from', 0))
-    to = int(getitem(args, 'to', 10))
 
-    # Create a polynomial line graph
-    x = list(range(_from, to + 1))
-    fig = figure(title="Polynomial")
-    fig.line(x, [i ** 2 for i in x], color=color, line_width=2)
 
     # Configure resources to include BokehJS inline in the document.
     # For more details see:
@@ -62,16 +77,13 @@ def polynomial():
 
     # For more details see:
     #   http://bokeh.pydata.org/en/latest/docs/user_guide/embedding.html#components
-    script, div = components(fig, INLINE)
+    script, div = components(hist, INLINE)
     html = flask.render_template(
         'embed.html',
         plot_script=script,
         plot_div=div,
         js_resources=js_resources,
         css_resources=css_resources,
-        color=color,
-        _from=_from,
-        to=to
     )
     return encode_utf8(html)
 
