@@ -10,13 +10,20 @@
 
     {{ css_resources|indent(4)|safe }}
 
+    {% for plot_script in scripts %}
     {{ plot_script|indent(4)|safe }}
+    {% endfor %}
+
 
   </head>
   <body>
     <!-- A simple form for changing the graph -->
     <p> Select your settings: </p>
+
+    {% for plot_div in divs %}
     {{ plot_div|indent(4)|safe }}
+    {% endfor %}
+
     <p> Demonstrates some very simple embedding into a webpage</p>
   </body>
 </html>

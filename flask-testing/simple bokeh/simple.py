@@ -58,14 +58,16 @@ def polynomial():
 
     # create plot html elements
     data = pd.DataFrame(responses.get_all_records())
-    hist = Histogram(data, values='Question 1')
-    script, div = components(hist, INLINE)
+    # hist = Histogram(data, values='Question 1')
 
-
-
-    # Grab the inputs arguments from the URL
-    # This is automated by the button
-    # args = flask.request.args
+    # create a list of plots
+    scripts = []
+    divs = []
+    for question in ['Question 1', 'Question 2']:
+        hist = Histogram(data, values=question)
+        script, div = components(hist, INLINE)
+        scripts.append(script)
+        divs.append(div)
 
 
 
@@ -74,14 +76,14 @@ def polynomial():
     #   http://bokeh.pydata.org/en/latest/docs/reference/resources_embedding.html#bokeh-embed
     js_resources = INLINE.render_js()
     css_resources = INLINE.render_css()
+    # script, div = components(hist, INLINE)
 
     # For more details see:
     #   http://bokeh.pydata.org/en/latest/docs/user_guide/embedding.html#components
-    script, div = components(hist, INLINE)
     html = flask.render_template(
         'embed.html',
-        plot_script=script,
-        plot_div=div,
+        scripts = scripts,
+        divs=divs,
         js_resources=js_resources,
         css_resources=css_resources,
     )
